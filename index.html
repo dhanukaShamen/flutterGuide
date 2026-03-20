@@ -152,6 +152,28 @@
     .tip-content{font-size:14px;color:var(--text-muted);line-height:1.7}
     .tip-content strong{color:var(--text)}
 
+    /* ── WARN / MISTAKE BOXES ── */
+    .warn-box{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.22);border-left:3px solid #f87171;border-radius:0 12px 12px 0;padding:20px 24px;margin:22px 0}
+    .warn-box .warn-label{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f87171;margin-bottom:8px}
+    .warn-box p,.warn-box ul{color:var(--text-muted);font-size:14px;line-height:1.75;margin:0}
+    .warn-box ul{padding-left:18px}
+    .warn-box li{margin-bottom:4px}
+    .warn-box code{font-family:'Space Mono',monospace;font-size:12px;background:rgba(248,113,113,.12);border-radius:4px;padding:1px 5px;color:#fca5a5}
+    .mistake-box{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-left:3px solid var(--accent4);border-radius:0 12px 12px 0;padding:20px 24px;margin:22px 0}
+    .mistake-box .mistake-label{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent4);margin-bottom:10px}
+    .mistake-box p{color:var(--text-muted);font-size:14px;line-height:1.75;margin:0 0 10px}
+    .mistake-box p:last-child{margin-bottom:0}
+    .mistake-box code{font-family:'Space Mono',monospace;font-size:12px;background:rgba(245,166,35,.1);border-radius:4px;padding:1px 5px;color:#fcd34d}
+    .mistake-vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+    .mistake-wrong,.mistake-right{border-radius:8px;padding:12px 14px;font-family:'Space Mono',monospace;font-size:12px;line-height:1.7}
+    .mistake-wrong{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);color:#fca5a5}
+    .mistake-right{background:rgba(62,207,178,.07);border:1px solid rgba(62,207,178,.2);color:var(--accent3)}
+    .mistake-vs-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;opacity:.7}
+    @media(max-width:600px){.mistake-vs{grid-template-columns:1fr}}
+
+    .responsive-grid { margin: 28px 0;display: grid;grid-template-columns: 1fr;gap: 16px;}
+    @media (min-width: 640px) {  .responsive-grid {grid-template-columns: 1fr 1fr;}}
+    
     /* ── COLOR SWATCH ── */
     .color-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:22px 0}
     .color-swatch{border-radius:12px;overflow:hidden;border:1px solid var(--border)}
@@ -338,8 +360,8 @@
   <h1>Master <span class="t1">Flutter</span><br>& <span class="t2">Firebase</span></h1>
   <p class="hero-sub">From Dart fundamentals to full-stack real-time apps — Flutter UI, Material 3, Animations, REST APIs, Local Storage, Provider, Firebase, and a complete Widget Reference.</p>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-number">29</div><div class="stat-label">Sections</div></div>
-    <div class="stat"><div class="stat-number">90+</div><div class="stat-label">Code Examples</div></div>
+    <div class="stat"><div class="stat-number">32</div><div class="stat-label">Sections</div></div>
+    <div class="stat"><div class="stat-number">100+</div><div class="stat-label">Code Examples</div></div>
     <div class="stat"><div class="stat-number">8</div><div class="stat-label">Chapters</div></div>
     <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Apps You Can Build</div></div>
   </div>
@@ -354,6 +376,7 @@
       <div class="toc-group-items">
         <a class="toc-item tc-dart" data-target="s01" href="#s01"><span class="toc-num">01</span> Dart Essentials</a>
         <a class="toc-item tc-dart" data-target="s02" href="#s02"><span class="toc-num">02</span> Understanding main.dart</a>
+        <a class="toc-item tc-dart" data-target="s-pub" href="#s-pub"><span class="toc-num">↳</span> pubspec.yaml</a>
       </div>
     </div>
     <div class="toc-group">
@@ -361,6 +384,8 @@
       <div class="toc-group-items">
         <a class="toc-item tc-core" data-target="s03" href="#s03"><span class="toc-num">03</span> What is Flutter?</a>
         <a class="toc-item tc-core" data-target="s04" href="#s04"><span class="toc-num">04</span> Widget Concept</a>
+        <a class="toc-item tc-core" data-target="s-ctx" href="#s-ctx"><span class="toc-num">↳</span> BuildContext</a>
+        <a class="toc-item tc-core" data-target="s-const" href="#s-const"><span class="toc-num">↳</span> const Widgets</a>
         <a class="toc-item tc-core" data-target="s05" href="#s05"><span class="toc-num">05</span> Layout Widgets</a>
         <a class="toc-item tc-core" data-target="s06" href="#s06"><span class="toc-num">06</span> UI Elements & M3</a>
         <a class="toc-item tc-core" data-target="s07" href="#s07"><span class="toc-num">07</span> State Management</a>
@@ -725,6 +750,103 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
   ));
 }</pre>
     </div>
+    <div class="mistake-box" style="margin:22px 24px">
+      <div class="mistake-label">&#x26A0;&#xFE0F; Hot Reload vs Hot Restart &mdash; know the difference</div>
+      <p>These are two different commands beginners often confuse. Using the wrong one causes &ldquo;why isn&rsquo;t my change showing up?&rdquo; frustration.</p>
+      <div class="mistake-vs">
+        <div class="mistake-wrong">
+          <div class="mistake-vs-label">&#x1F525; Hot Reload (r)</div>
+          Injects updated code into the running VM. <strong>State is preserved.</strong> Widgets rebuild from their current state &mdash; perfect for tweaking UI. Does <em>not</em> re-run <code>initState()</code> or <code>main()</code>.
+        </div>
+        <div class="mistake-right">
+          <div class="mistake-vs-label">&#x1F504; Hot Restart (R / Shift+R)</div>
+          Fully restarts the app from scratch. <strong>State is lost.</strong> Runs <code>main()</code> again &mdash; required when you add a new package, change <code>main()</code>, or add global variables.
+        </div>
+      </div>
+      <p style="margin-top:12px">If you get a <code>setState() called after dispose()</code> error or a new package isn&rsquo;t found &mdash; try <strong>Hot Restart</strong> before assuming something is broken.</p>
+    </div>
+  </section>
+
+
+  <!-- pubspec.yaml -->
+  <section class="section" id="s-pub" style="max-width:1100px;margin:0 auto;padding-left:24px;padding-right:24px">
+    <div class="section-header">
+      <div class="section-icon icon-dart">&#x1F4E6;</div>
+      <div class="section-title-group">
+        <div class="section-label" style="color:#54c5f8">Section 02b &middot; Dart</div>
+        <h2 class="section-title">pubspec.yaml:<br>Your App&rsquo;s Package Manager</h2>
+        <p class="section-desc"><code>pubspec.yaml</code> is the configuration file at the root of every Flutter project. It declares your app&rsquo;s name, version, dependencies, assets, and more. Every time you add a package from pub.dev, this file is what changes &mdash; and running <code>flutter pub get</code> is what makes it take effect.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><div class="code-dot r"></div><div class="code-dot y"></div><div class="code-dot g"></div></div><span class="code-lang">YAML &mdash; pubspec.yaml annotated</span><button class="copy-btn" onclick="copyCode(this)">COPY</button></div>
+      <pre><span class="cmt"># The app name used by Dart internally (lowercase + underscores only)</span>
+name: my_flutter_app
+description: A new Flutter project.
+
+<span class="cmt"># App version: semver+build-number (used by stores)</span>
+version: 1.0.0+1
+
+environment:
+  sdk: &apos;&gt;=3.0.0 &lt;4.0.0&apos;   <span class="cmt"># minimum Dart SDK required</span>
+
+<span class="cmt"># ── dependencies ─────────────────────────────────────────────
+# Packages your app needs to RUN. These ship to users.</span>
+<span class="kw">dependencies</span>:
+  flutter:
+    sdk: flutter             <span class="cmt"># Flutter itself is always here</span>
+  http: ^1.2.0               <span class="cmt"># ^ = "compatible with 1.2.0"</span>
+  provider: ^6.1.1           <span class="cmt">     (1.x.x OK, 2.0.0 NOT OK)</span>
+  shared_preferences: ^2.2.2
+
+<span class="cmt"># ── dev_dependencies ──────────────────────────────────────────
+# Only needed during development. NOT shipped to users.</span>
+<span class="kw">dev_dependencies</span>:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0      <span class="cmt"># linting rules, dev-only</span>
+
+<span class="cmt"># ── flutter section ───────────────────────────────────────────</span>
+<span class="kw">flutter</span>:
+  uses-material-design: true  <span class="cmt"># enables Material icon fonts</span>
+
+  <span class="kw">assets</span>:                     <span class="cmt"># files your app can load at runtime</span>
+    - assets/images/          <span class="cmt"># trailing / includes the whole folder</span>
+    - assets/icons/logo.png   <span class="cmt"># or list individual files</span>
+
+  <span class="kw">fonts</span>:                      <span class="cmt"># custom fonts</span>
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700</pre>
+    </div>
+
+    <div class="concept-box dart">
+      <div class="concept-label">&#x1F522; Version Constraints &mdash; what ^ means</div>
+      <p>The caret <code>^</code> means &ldquo;accept any version compatible with this one.&rdquo; <code>^1.2.0</code> accepts <code>1.2.x</code> and <code>1.3.x</code> but <em>not</em> <code>2.0.0</code>, because major bumps can break APIs. This follows <strong>semantic versioning</strong>: <code>major.minor.patch</code>. Always use <code>^</code> for third-party packages unless you have a specific reason to pin an exact version.</p>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Key</th><th>What it does</th><th>Shipped to users?</th></tr>
+        <tr><td>dependencies</td><td><strong>Runtime packages</strong> &mdash; included in the final app build</td><td style="color:var(--accent2)">Yes</td></tr>
+        <tr><td>dev_dependencies</td><td><strong>Dev-only packages</strong> &mdash; testing, linting, code generation</td><td style="color:var(--accent3)">No</td></tr>
+        <tr><td>assets</td><td>Declare images, JSON, fonts so Flutter bundles them in the build</td><td style="color:var(--accent2)">Yes</td></tr>
+        <tr><td>flutter pub get</td><td>Downloads all declared packages. Run after editing pubspec.yaml</td><td style="color:var(--accent3)">Dev command</td></tr>
+        <tr><td>flutter pub upgrade</td><td>Updates packages to their latest compatible versions</td><td style="color:var(--accent3)">Dev command</td></tr>
+      </table>
+    </div>
+
+    <div class="mistake-box">
+      <div class="mistake-label">&#x26A0;&#xFE0F; Common Mistake &mdash; package not found after adding it</div>
+      <p>After adding a package to <code>pubspec.yaml</code>, you must run <code>flutter pub get</code> to download it. Hot Reload is not enough. If the import still shows red after <code>pub get</code>, try a full <strong>Hot Restart</strong>.</p>
+      <div class="mistake-vs">
+        <div class="mistake-wrong"><div class="mistake-vs-label">&#x2717; Forgot this step</div>Added package to pubspec &rarr; hit Hot Reload &rarr; <code>Error: package not found</code></div>
+        <div class="mistake-right"><div class="mistake-vs-label">&#x2713; Correct workflow</div>Added package to pubspec &rarr; <code>flutter pub get</code> &rarr; import the package &rarr; Hot Restart</div>
+      </div>
+    </div>
   </section>
 
 
@@ -839,7 +961,7 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
       </div>
     </div>
 
-    <div style="margin:28px 0; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div class="responsive-grid">
       <div class="card">
         <div class="card-title">🧱 StatelessWidget</div>
         <div class="card-body" style="margin-top:8px">A widget that <strong>never changes</strong> after it's built. Like a painted wall — it looks the same every time. Perfect for static content like labels, icons, or layouts that don't change. Use this when your UI doesn't react to user interaction.</div>
@@ -894,7 +1016,7 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0">
+    <div class="responsive-grid">
       <div class="card" style="border-color:rgba(232,93,117,.3)">
         <div class="card-title" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent2)">child: — one widget only</div>
         <div class="card-body" style="margin-top:12px;font-family:'Space Mono',monospace;font-size:12px;line-height:2;color:var(--text-muted)">
@@ -1021,6 +1143,148 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
       </div>
     </div>
   </section>
+
+
+  <!-- BuildContext deep-dive -->
+  <section class="section" id="s-ctx" style="max-width:1100px;margin:0 auto;padding-left:24px;padding-right:24px">
+    <div class="section-header">
+      <div class="section-icon icon-purple">&#x1F9ED;</div>
+      <div class="section-title-group">
+        <div class="section-label" style="color:var(--accent)">Section 04b &middot; Flutter</div>
+        <h2 class="section-title">BuildContext:<br>Your Widget&rsquo;s Location in the Tree</h2>
+        <p class="section-desc"><code>BuildContext</code> appears in every <code>build()</code> method, yet most beginners treat it as magic boilerplate. It is the single biggest source of confusing runtime errors. Understanding it prevents hours of frustration.</p>
+      </div>
+    </div>
+
+    <div class="concept-box">
+      <div class="concept-label">&#x1F4CD; What is BuildContext?</div>
+      <p>A <code>BuildContext</code> is a <strong>handle to a widget&rsquo;s location in the widget tree</strong>. Every widget has its own context. Flutter uses context to walk <em>up</em> the tree to find the nearest ancestor that provides something &mdash; a Theme, a Navigator, a Provider. Think of it as a GPS coordinate: it tells Flutter <em>where</em> your widget lives so it can look up the right ancestor.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><div class="code-dot r"></div><div class="code-dot y"></div><div class="code-dot g"></div></div><span class="code-lang">Dart &mdash; What context is used for</span><button class="copy-btn" onclick="copyCode(this)">COPY</button></div>
+      <pre><span class="kw">class</span> <span class="typ">MyWidget</span> <span class="kw">extends</span> <span class="typ">StatelessWidget</span> {
+  <span class="kw">const</span> <span class="typ">MyWidget</span>({<span class="kw">super</span>.key});
+
+  <span class="ann">@override</span>
+  <span class="typ">Widget</span> <span class="fn">build</span>(<span class="typ">BuildContext</span> context) {
+    <span class="cmt">// Look up the nearest Theme ancestor</span>
+    <span class="kw">final</span> theme = <span class="typ">Theme</span>.<span class="fn">of</span>(context);
+
+    <span class="cmt">// Look up the nearest Navigator ancestor (for navigation)</span>
+    <span class="typ">Navigator</span>.<span class="fn">of</span>(context).<span class="fn">push</span>(...);
+
+    <span class="cmt">// Look up screen dimensions</span>
+    <span class="kw">final</span> size = <span class="typ">MediaQuery</span>.<span class="fn">sizeOf</span>(context);
+
+    <span class="cmt">// Look up a Provider value (covered in §19)</span>
+    <span class="kw">final</span> cart = <span class="typ">Provider</span>.<span class="fn">of</span>&lt;<span class="typ">CartModel</span>&gt;(context);
+
+    <span class="kw">return</span> <span class="typ">Text</span>(
+      <span class="str">'Items: </span>${cart.count}<span class="str">'</span>,
+      style: theme.textTheme.bodyLarge,
+    );
+  }
+}</pre>
+    </div>
+
+    <div class="tree">
+      <div style="color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">Context walks UP the tree to find ancestors</div>
+      <div class="tree-node"><span class="tree-widget tw-blue">MaterialApp</span><span class="tree-note">&#x2190; provides Navigator, Theme</span></div>
+      <div style="padding-left:24px">
+        <div class="tree-node"><span style="color:var(--text-dim)">&#x2514;&#x2500;</span> <span class="tree-widget tw-purple">Scaffold</span></div>
+        <div style="padding-left:30px">
+          <div class="tree-node"><span style="color:var(--text-dim)">&#x2514;&#x2500;</span> <span class="tree-widget tw-teal">MyWidget</span><span class="tree-note">&#x2190; context lives HERE</span></div>
+          <div style="padding-left:30px;color:var(--text-dim);font-size:11px;margin-top:6px">
+            Theme.of(context) &rarr; walks up &rarr; finds MaterialApp&rsquo;s Theme<br>
+            Navigator.of(context) &rarr; walks up &rarr; finds MaterialApp&rsquo;s Navigator
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-label">&#x26A0;&#xFE0F; Never use context across an async gap</div>
+      <p>This is one of the most common silent bugs in Flutter. After an <code>await</code>, the widget may have been removed from the tree. Using its <code>context</code> after that point is unsafe and causes the warning <code>use_build_context_synchronously</code>.</p>
+      <div style="margin-top:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="mistake-wrong"><div class="mistake-vs-label">&#x2717; Unsafe &mdash; context used after await</div><code style="white-space:pre-wrap">onPressed: () async {
+            await someNetworkCall();
+            // Widget may be gone!
+            Navigator.of(context).push(...);
+            }</code></div>
+          <div class="mistake-right"><div class="mistake-vs-label">&#x2713; Safe &mdash; check mounted first</div><code style="white-space:pre-wrap">onPressed: () async {
+            await someNetworkCall();
+            if (!mounted) return; // guard
+            Navigator.of(context).push(...);
+            }</code></div>
+        </div>
+      </div>
+      <p style="margin-top:12px">In a <code>StatefulWidget</code>, check <code>if (!mounted) return;</code> immediately after every <code>await</code> before touching <code>context</code> or calling <code>setState()</code>.</p>
+    </div>
+  </section>
+
+
+  <!-- const constructors -->
+  <section class="section" id="s-const" style="max-width:1100px;margin:0 auto;padding-left:24px;padding-right:24px">
+    <div class="section-header">
+      <div class="section-icon icon-teal">&#x26A1;</div>
+      <div class="section-title-group">
+        <div class="section-label" style="color:var(--accent)">Section 04c &middot; Flutter</div>
+        <h2 class="section-title">const Constructors:<br>Free Performance You&rsquo;re Probably Missing</h2>
+        <p class="section-desc">Most beginners write <code>Text(&apos;hello&apos;)</code> everywhere. The correct habit is <code>const Text(&apos;hello&apos;)</code> &mdash; and it costs you nothing to type. Flutter will not rebuild a <code>const</code> widget even if its parent rebuilds.</p>
+      </div>
+    </div>
+
+    <div class="concept-box teal">
+      <div class="concept-label">&#x1F9E0; Why const matters</div>
+      <p>Flutter rebuilds widget subtrees when state changes. A <code>const</code> widget is <strong>compile-time constant</strong> &mdash; Flutter knows it can never change, so it skips rebuilding it entirely and reuses the same object. On a screen that rebuilds frequently (e.g. every animation frame), <code>const</code> widgets become free to keep.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><div class="code-dot r"></div><div class="code-dot y"></div><div class="code-dot g"></div></div><span class="code-lang">Dart &mdash; const vs non-const widgets</span><button class="copy-btn" onclick="copyCode(this)">COPY</button></div>
+      <pre><span class="cmt">// ✗ Every rebuild creates a new Text object</span>
+<span class="typ">Text</span>(<span class="str">&apos;Hello World&apos;</span>)
+<span class="typ">SizedBox</span>(height: <span class="num">16</span>)
+<span class="typ">Icon</span>(<span class="typ">Icons</span>.star)
+
+<span class="cmt">// ✓ Flutter reuses the same object across rebuilds — no allocation</span>
+<span class="kw">const</span> <span class="typ">Text</span>(<span class="str">&apos;Hello World&apos;</span>)
+<span class="kw">const</span> <span class="typ">SizedBox</span>(height: <span class="num">16</span>)
+<span class="kw">const</span> <span class="typ">Icon</span>(<span class="typ">Icons</span>.star)
+
+<span class="cmt">// ✓ If all children are const, the parent can be too</span>
+<span class="kw">const</span> <span class="typ">Column</span>(
+  children: [
+    <span class="typ">Text</span>(<span class="str">&apos;Line 1&apos;</span>),    <span class="cmt">// no need to repeat const inside a const parent</span>
+    <span class="typ">SizedBox</span>(height: <span class="num">8</span>),
+    <span class="typ">Text</span>(<span class="str">&apos;Line 2&apos;</span>),
+  ],
+)
+
+<span class="cmt">// ✗ Cannot be const — uses a runtime value</span>
+<span class="typ">Text</span>(userName)           <span class="cmt">// variable → not known at compile time</span>
+<span class="typ">Text</span>(<span class="str">&apos;Count: </span>$_count<span class="str">&apos;</span>)  <span class="cmt">// interpolation → not const</span>
+<span class="typ">Container</span>(color: myColor) <span class="cmt">// runtime value → not const</span></pre>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Rule</th><th>Example</th></tr>
+        <tr><td><strong>All arguments must be compile-time constants</strong></td><td><code>const Text(&apos;hello&apos;)</code> &#x2713; &nbsp; <code>const Text(myVar)</code> &#x2717;</td></tr>
+        <tr><td><strong>Literals are constants</strong></td><td>Strings in quotes, plain numbers, <code>Icons.star</code>, <code>Colors.red</code></td></tr>
+        <tr><td><strong>Variables are not constants</strong></td><td>Anything from state, parameters, or <code>context</code></td></tr>
+        <tr><td><strong>Your IDE will tell you</strong></td><td>VS Code / Android Studio underlines where <code>const</code> can be added</td></tr>
+      </table>
+    </div>
+
+    <div class="tip">
+      <div class="tip-emoji">&#x1F4A1;</div>
+      <div class="tip-content"><strong>Enable the lint:</strong> Add <code>prefer_const_constructors</code> and <code>prefer_const_literals_to_create_immutables</code> to your <code>analysis_options.yaml</code>. Your IDE will then highlight every place you forgot <code>const</code> automatically &mdash; no mental overhead required.</div>
+    </div>
+  </section>
+
+
   <section class="section" id="s05">
     <div class="section-header">
       <div class="section-icon icon-pink">📐</div>
@@ -1152,6 +1416,35 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
   ),
   child: <span class="kw">const</span> <span class="typ">Text</span>(<span class="str">'Styled Box'</span>),
 )</pre>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-label">&#x26A0;&#xFE0F; RenderFlex Overflow &mdash; the yellow-black striped error</div>
+      <p>This is the most common runtime error beginners hit. You&rsquo;ll see a yellow-and-black striped bar in the app and a message like <code>A RenderFlex overflowed by 42 pixels on the bottom.</code> It means a <code>Column</code> or <code>Row</code> is trying to be bigger than the space it&rsquo;s given.</p>
+      <p style="margin-top:10px"><strong>Common causes and fixes:</strong></p>
+      <ul style="margin-top:6px">
+        <li><strong>Column inside a Column inside a Scaffold body</strong> &mdash; the inner Column has unbounded height. Fix: wrap it in <code>Expanded</code> or <code>SingleChildScrollView</code>.</li>
+        <li><strong>Long list of widgets in a Column</strong> &mdash; the Column tries to be as tall as all its children combined. Fix: replace with <code>ListView</code> or wrap the Column in <code>SingleChildScrollView</code>.</li>
+        <li><strong>Row with too many items</strong> &mdash; children don&rsquo;t fit horizontally. Fix: wrap overflowing children in <code>Expanded</code> or <code>Flexible</code>, or use <code>Wrap</code> instead of <code>Row</code>.</li>
+      </ul>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+        <div class="mistake-wrong"><div class="mistake-vs-label">&#x2717; Overflows</div><code style="white-space:pre-wrap">Column(
+          children: [
+          Column(        // unbounded!
+          children: [...long list...],
+          ),
+          ],
+          )</code></div>
+        <div class="mistake-right"><div class="mistake-vs-label">&#x2713; Fixed with Expanded</div><code style="white-space:pre-wrap">Column(
+          children: [
+          Expanded(      // takes remaining space
+          child: ListView(
+          children: [...long list...],
+          ),
+          ),
+          ],
+          )</code></div>
+      </div>
     </div>
   </section>
   <section class="section" id="s06">
@@ -1480,6 +1773,28 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
       <div class="concept-label">✅ Beginner advice</div>
       <p>Start with <strong>setState</strong> — it's built-in, requires no packages, and is perfect for learning. Once your app grows and you need to share data between screens, then move to <strong>Provider</strong> or <strong>Riverpod</strong>.</p>
     </div>
+
+    <div class="warn-box">
+      <div class="warn-label">&#x26A0;&#xFE0F; setState after async — a silent bug</div>
+      <p>Calling <code>setState()</code> after an <code>await</code> is one of the most common bugs beginners write. If the widget was removed from the tree while the async operation ran, calling <code>setState()</code> on a disposed widget crashes the app or produces the warning <code>setState() called after dispose()</code>.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+        <div class="mistake-wrong"><div class="mistake-vs-label">&#x2717; Unsafe — widget may be disposed</div><code style="white-space:pre-wrap">Future&lt;void&gt; _loadData() async {
+          final data = await fetchFromApi();
+          // Widget might be gone here!
+          setState(() {
+          _items = data;
+          });
+          }</code></div>
+        <div class="mistake-right"><div class="mistake-vs-label">&#x2713; Safe — check mounted first</div><code style="white-space:pre-wrap">Future&lt;void&gt; _loadData() async {
+          final data = await fetchFromApi();
+          if (!mounted) return; // guard
+          setState(() {
+          _items = data;
+          });
+          }</code></div>
+      </div>
+      <p style="margin-top:12px">The fix is one line: <code>if (!mounted) return;</code> immediately after every <code>await</code> in a <code>StatefulWidget</code> method. <code>mounted</code> is a built-in property — <code>true</code> while the widget is in the tree, <code>false</code> after disposal.</p>
+    </div>
   </section>
   <section class="section" id="s08">
     <div class="section-header">
@@ -1715,7 +2030,7 @@ skills.<span class="fn">add</span>(<span class="str">'Flutter'</span>); <span cl
       <p>Think of a stack of cards. You always see the top card. <strong>push</strong> places a new card on top. <strong>pop</strong> removes the top card to reveal the one beneath. <code>pushReplacement</code> swaps the top card. <code>pushAndRemoveUntil</code> clears the deck and starts fresh. The card beneath is always preserved — it remembers its state.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0">
+    <div style="responsive-grid">
       <div class="card">
         <div class="card-title" style="font-family:'Space Mono',monospace;font-size:13px">Navigator.push()</div>
         <div class="card-body" style="margin-top:8px">Add a new screen on top of the stack. User can go back with the back button. State of the previous screen is preserved.</div>
@@ -2624,7 +2939,7 @@ _ctrl.<span class="fn">animateTo</span>(<span class="num">0.5</span>);         <
       <p>Imagine your logged-in user's name needs to display on a <strong>ProfileScreen</strong>, an <strong>AppBar</strong>, and a <strong>SettingsScreen</strong>. With only <code>setState</code>, you'd have to pass that user object down through every widget in between — even widgets that don't use it at all. This is called "prop drilling" and it makes code messy and hard to maintain very quickly.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0">
+    <div class="responsive-grid">
       <div class="card" style="border-color:rgba(232,93,117,0.3)">
         <div class="card-title" style="color:var(--accent2)">❌ Without Provider</div>
         <div class="card-body" style="margin-top:10px;font-family:'Space Mono',monospace;font-size:12px;line-height:1.9;color:var(--accent2)">
